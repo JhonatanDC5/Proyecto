@@ -54,12 +54,6 @@
             background-color: #6600c5;
         }
     </style>
-     <script>
-        function redirectToHome(event) {
-            event.preventDefault(); 
-            window.location.href="hola.html"; 
-        }
-    </script>
 </head>
 <body>
     <div class="form-container">
@@ -84,5 +78,22 @@
             <button type="submit">Registrarse</button>
         </form>
     </div>
+    <script>
+        const form = document.getElementById('registerForm');
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(form);
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: formData,
+            });
+            if (response.ok) {
+                window.location.href = '/login.html'; 
+            } else {
+                alert('Error al registrarse. Por favor, intenta de nuevo.');
+            }
+        });
+    </script>
 </body>
 </html>
